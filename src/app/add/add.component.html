@@ -1,0 +1,60 @@
+<body style="display: flex; justify-content: center">
+  <div class="wrapper">
+    <h1 style="text-align: center;">To do list</h1>
+    <div style="padding: 10px">
+      <input type="text" id="name"  [(ngModel)] = "inputVal"/>
+      <button type="button" style="margin-right:8px;" (click)="addToDo(inputVal)">Add</button>
+      <select #selectedOption (change)="onSelected($event)">
+        <option>All</option>
+        <option>Completed</option>
+        <option>Uncompleted</option>
+      </select>
+    </div>
+    <div>    
+
+    
+
+    <div style="display:flex;justify-content:center">
+    <div [ngSwitch]="type">
+      <div *ngSwitchCase="'All'">
+        <div *ngFor="let value of toDoList">
+            <div style="display: flex;">
+                <p  class="output" [ngClass]="value?.isCompleted ? 's' : '' ">{{ value.name }}</p>
+                <button type="button" style="background-color:greenyellow"  (click)="done(value)">Done</button>
+                <button type="button" style="background-color:red"  (click)="delete(value)">Delete</button>
+            </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'Completed'">
+        <div *ngFor="let value of displayList ; let i = index">
+            <div style="display: flex">
+                <p class="output" [ngClass]="value?.isCompleted? 's' : ''">{{ value.name  }}</p>
+                <button type="button" style="background-color:greenyellow"  (click)="done(value)" >Done</button>
+                <button type="button" style="background-color:red"  (click)="delete(value)">Delete</button>
+            </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'Uncompleted'">
+        <div *ngFor="let value of displayList">
+            <div style="display: flex">
+                <p class="output">{{ value.name  }}</p>
+                <button type="button" style="background-color:greenyellow"  (click)="done(value)">Done</button>
+                <button type="button" style="background-color:red"  (click)="delete(value)">Delete</button>
+            </div>
+        </div>
+      </div>
+      <div *ngSwitchDefault>
+        <div *ngFor="let i of toDoList">
+            <div style="display: flex">
+                <p class="output" [ngClass]="i?.isCompleted? 's' : ''">{{ i.name  }}</p>
+                <button type="button" style="background-color:greenyellow"  (click)="done(i)">Done</button>
+                <button type="button" style="background-color:red"  (click)="delete(i)">Delete</button>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div> 
+
+</div>
+  </div>
+</body>
